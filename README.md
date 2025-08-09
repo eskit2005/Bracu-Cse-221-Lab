@@ -1,9 +1,18 @@
- Contains all the Lab assignment solutions of Summer 2025 Bracu.
-                 
- The lab qns are all given as pdf format as codeforces link become invalid soon after semester ends.
-                  
- Preivous Mid/Final and theory assignment qns will be posted later on.
+# 🎓 **cse221 Bracu Summer 2025** 🌞
 
- For now, here is the offical student materials for cse221(including slides): https://share.google/Uobpz8uWuK7SkwELy
-                  
-                  
+---
+
+📚 **Contains all the Lab assignment solutions of Summer 2025 Bracu.**
+
+---
+
+📝 The lab questions are all given as **PDF format** since Codeforces links become invalid soon after the semester ends.
+
+---
+
+📂 Previous Mid/Final and theory assignment questions will be posted later on.
+
+---
+
+🎉 For now, here is the **official student materials** for **CSE221** (including slides):  
+[https://share.google/Uobpz8uWuK7SkwELy](https://share.google/Uobpz8uWuK7SkwELy)
