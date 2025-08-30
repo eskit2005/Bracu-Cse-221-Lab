@@ -7,60 +7,60 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.PriorityQueue;
 
-public class Ordering {
-    public static void main(String[]args) throws IOException{
+public class Ordering{
+    public static void main(String[]args)throws IOException{
         BufferedReader reader=new BufferedReader(new InputStreamReader(System.in));
         PrintWriter writer=new PrintWriter(System.out);
-        int N=Integer.parseInt(reader.readLine());
-        String [] string=new String[N];
+        int n=Integer.parseInt(reader.readLine());
+        String [] words=new String[n];
         boolean [] track=new boolean[26];
-        int [] in_degree=new int[26];
-        for(int i=0;i<N;i++){
-            string[i]=reader.readLine();
-            for (char cha : string[i].toCharArray()) 
-                track[cha - 'a'] = true;
+        int [] indegrees=new int[26];
+        ArrayList<List<Integer>> adj=new ArrayList<>();
+        for(int i=0;i<=26;i++){
+            adj.add(new LinkedList<>());
         }
-        ArrayList<List<Integer>> adj=new ArrayList<>(26);
-        for(int i=0;i<26;i++)adj.add(new LinkedList<>());
-        
+        for(int i=0;i<n;i++){
+            words[i]=reader.readLine();
+            for(int k=0;k<words[i].length();k++){
+                char c=words[i].charAt(k);
+                track[c-'a']=true;
+            }
+        }
 
-
-        for(int i=0;i<N-1;i++){
-            String temp=string[i];
-            String temp1=string[i+1];
-            int len=Math.min(temp.length(),temp1.length());
+        for(int i=0;i<n-1;i++){
+            String temp=words[i];
+            String temp1=words[i+1];
             boolean valid=false;
+            int len=Math.min(temp.length(),temp1.length());
             for(int k=0;k<len;k++){
                 if(temp.charAt(k)!=temp1.charAt(k)){
-                    adj.get(temp.charAt(k)-'a').add(temp1.charAt(k)-'a');
-                    in_degree[temp1.charAt(k)-'a']++;
                     valid=true;
+                    indegrees[temp1.charAt(k)-'a']++;
+                    adj.get(temp.charAt(k)-'a').add(temp1.charAt(k)-'a');
                     break;
-                    
                 }
             }
-            
+
             if(!valid && temp.length()>temp1.length()){
                 writer.println(-1);
                 writer.close();
                 return;
-
             }
         }
 
-
-        PriorityQueue<Integer> queue = new PriorityQueue<>();
-        for (int i = 0; i < 26; i++) {
-            if (track[i] && in_degree[i] == 0) queue.offer(i);
+        PriorityQueue<Integer> queue=new PriorityQueue<>();
+        for(int i=0;i<26;i++){
+            if(track[i] && indegrees[i]==0) queue.offer(i);
         }
 
-        String result = "";
-        while (!queue.isEmpty()) {
-            int u = queue.poll();
-            result += (char) (u + 'a'); 
-            for (int v : adj.get(u)) {
-                in_degree[v]--;
-                if (in_degree[v] == 0) queue.offer(v);
+        String result="";
+        while(!queue.isEmpty()){
+            int u=queue.poll();
+            char c=(char)((int)u+'a');
+            result+=c;
+            for(int num:adj.get(u)){
+                indegrees[num]--;
+                if(indegrees[num]==0) queue.offer(num);
             }
         }
 
@@ -74,7 +74,5 @@ public class Ordering {
 
         writer.println(result);
         writer.close();
-
-
     }
 }
