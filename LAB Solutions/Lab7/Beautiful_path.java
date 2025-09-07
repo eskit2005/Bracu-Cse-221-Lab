@@ -40,8 +40,6 @@ public class Beautiful_path {
     public static int dijkstra(ArrayList<List<Integer>>adj,int[] w,int n,int source,int destination){
         boolean [] visited=new boolean[n+1];
         int [] distance=new int[n+1];
-        int [] parent=new int[n+1];
-        parent[source]=-1;
         Arrays.fill(distance,Integer.MAX_VALUE);
         distance[source]=w[source];
         PriorityQueue<Pair> queue=new PriorityQueue<>((a,b)->Integer.compare(a.weight,b.weight));
@@ -54,7 +52,6 @@ public class Beautiful_path {
             for(int neighbor:adj.get(node)){
                 if(distance[neighbor]>distance[node]+w[neighbor]){
                     distance[neighbor]=distance[node]+w[neighbor];
-                    parent[neighbor]=node;
                     queue.offer(new Pair(neighbor,distance[neighbor]));
                 }
             }
